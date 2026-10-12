@@ -1,0 +1,9 @@
+# Normalise text files to LF in the repository (Docker/CI run on Linux).
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.pdf binary
+*.mp4 binary
+*.docx binary
+*.zip binary
