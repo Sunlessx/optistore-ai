@@ -1,0 +1,103 @@
+{
+  "_comment": "APPROXIMATE Amazon S3 list prices used for estimates only. Verify against https://aws.amazon.com/s3/pricing/ before making decisions. Prices change and exclude taxes, free tier, data transfer, volume discounts and private pricing agreements.",
+  "source": "https://aws.amazon.com/s3/pricing/",
+  "as_of": "2025 (public list prices, first pricing tier)",
+  "currency": "USD",
+  "regions": {
+    "us-east-1": {
+      "STANDARD": {
+        "label": "S3 Standard",
+        "storage_gb_month": 0.023,
+        "put_per_1000": 0.005,
+        "get_per_1000": 0.0004,
+        "transition_per_1000": 0.0,
+        "retrieval_per_gb": 0.0,
+        "retrieval_request_per_1000": 0.0,
+        "min_storage_days": 0,
+        "min_billable_bytes": 0,
+        "overhead_bytes": 0,
+        "first_byte_latency": "milliseconds",
+        "requires_restore": false,
+        "availability_sla": "99.9%"
+      },
+      "STANDARD_IA": {
+        "label": "S3 Standard-Infrequent Access",
+        "storage_gb_month": 0.0125,
+        "put_per_1000": 0.01,
+        "get_per_1000": 0.001,
+        "transition_per_1000": 0.01,
+        "retrieval_per_gb": 0.01,
+        "retrieval_request_per_1000": 0.0,
+        "min_storage_days": 30,
+        "min_billable_bytes": 131072,
+        "overhead_bytes": 0,
+        "first_byte_latency": "milliseconds",
+        "requires_restore": false,
+        "availability_sla": "99%"
+      },
+      "INTELLIGENT_TIERING": {
+        "label": "S3 Intelligent-Tiering",
+        "storage_gb_month": 0.023,
+        "tiers": {"frequent": 0.023, "infrequent": 0.0125, "archive_instant": 0.004},
+        "monitoring_per_1000_objects_month": 0.0025,
+        "monitoring_min_object_bytes": 131072,
+        "put_per_1000": 0.005,
+        "get_per_1000": 0.0004,
+        "transition_per_1000": 0.01,
+        "retrieval_per_gb": 0.0,
+        "retrieval_request_per_1000": 0.0,
+        "min_storage_days": 0,
+        "min_billable_bytes": 0,
+        "overhead_bytes": 0,
+        "first_byte_latency": "milliseconds (automatic tiers modelled; optional archive tiers not modelled)",
+        "requires_restore": false,
+        "availability_sla": "99%"
+      },
+      "GLACIER_IR": {
+        "label": "S3 Glacier Instant Retrieval",
+        "storage_gb_month": 0.004,
+        "put_per_1000": 0.02,
+        "get_per_1000": 0.01,
+        "transition_per_1000": 0.02,
+        "retrieval_per_gb": 0.03,
+        "retrieval_request_per_1000": 0.0,
+        "min_storage_days": 90,
+        "min_billable_bytes": 131072,
+        "overhead_bytes": 0,
+        "first_byte_latency": "milliseconds",
+        "requires_restore": false,
+        "availability_sla": "99%"
+      },
+      "GLACIER": {
+        "label": "S3 Glacier Flexible Retrieval",
+        "storage_gb_month": 0.0036,
+        "put_per_1000": 0.03,
+        "get_per_1000": 0.0004,
+        "transition_per_1000": 0.03,
+        "retrieval_per_gb": 0.01,
+        "retrieval_request_per_1000": 0.05,
+        "min_storage_days": 90,
+        "min_billable_bytes": 0,
+        "overhead_bytes": 40960,
+        "first_byte_latency": "minutes to hours (standard retrieval 3-5 hours)",
+        "requires_restore": true,
+        "availability_sla": "99.9% (after restore)"
+      },
+      "DEEP_ARCHIVE": {
+        "label": "S3 Glacier Deep Archive",
+        "storage_gb_month": 0.00099,
+        "put_per_1000": 0.05,
+        "get_per_1000": 0.0004,
+        "transition_per_1000": 0.05,
+        "retrieval_per_gb": 0.02,
+        "retrieval_request_per_1000": 0.10,
+        "min_storage_days": 180,
+        "min_billable_bytes": 0,
+        "overhead_bytes": 40960,
+        "first_byte_latency": "hours (standard retrieval within 12 hours)",
+        "requires_restore": true,
+        "availability_sla": "99.9% (after restore)"
+      }
+    }
+  }
+}

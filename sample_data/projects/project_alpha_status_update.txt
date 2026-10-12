@@ -1,0 +1,12 @@
+Project Alpha - Status Update (October)
+
+Budget: $50,000
+Deadline: March 15, 2026
+Team size: 6
+Client: Northwind Traders
+Project lead: Sarah Chen
+
+Project Alpha will migrate the customer analytics platform to a managed cloud data warehouse.
+The team will consolidate three legacy reporting databases into a single schema.
+Northwind Traders approved the data-retention policy on October 2, 2025.
+Weekly status meetings are held every Tuesday at 10:00.

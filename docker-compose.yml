@@ -1,0 +1,52 @@
+# Local stack: PostgreSQL + FastAPI backend + nginx-served React frontend.
+#   docker compose up --build      ->  http://localhost:8080
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: optistore
+      POSTGRES_USER: optistore
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-optistore-dev-only}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U optistore -d optistore"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql+psycopg://optistore:${POSTGRES_PASSWORD:-optistore-dev-only}@db:5432/optistore
+      DATA_DIR: /app/data
+      # Inside the container the demo data and your own folders are mounted under /data.
+      ALLOWED_SCAN_ROOTS: /data
+      CORS_ORIGINS: http://localhost:8080
+    volumes:
+      - appdata:/app/data
+      - ./sample_data:/data/sample_data:ro
+      # Mount additional folders read-only, e.g.:
+      # - /path/on/host/documents:/data/documents:ro
+      # Optional AWS credentials (read-only mount of your local profile):
+      # - ~/.aws:/home/optistore/.aws:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:
+  appdata:
